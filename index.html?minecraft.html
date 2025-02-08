@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Угадай число</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Игра "Угадай число"</h1>
+    <p>Угадайте число от 1 до 100:</p>
+    <input type="number" id="guess" min="1" max="100">
+    <button onclick="checkGuess()">Угадать</button>
+    <p id="message"></p>
+
+    <script>
+        const randomNumber = Math.floor(Math.random() * 100) + 1;
+
+        function checkGuess() {
+            const userGuess = document.getElementById('guess').value;
+            const message = document.getElementById('message');
+            
+            if (userGuess == randomNumber) {
+                message.textContent = 'Поздравляю! Вы угадали число!';
+            } else if (userGuess < randomNumber) {
+                message.textContent = 'Ваше число слишком маленькое. Попробуйте еще раз.';
+            } else {
+                message.textContent = 'Ваше число слишком большое. Попробуйте еще раз.';
+            }
+        }
+    </script>
+</body>
+</html>
