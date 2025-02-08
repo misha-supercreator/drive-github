@@ -12,18 +12,21 @@
 </head>
 <body>
     <h1>XSS Тестирование</h1>
+    <input type="text" id="userInput" placeholder="Введите текст здесь" style="width: 100%; padding: 10px; margin-bottom: 10px;">
     <button onclick="showSafeAttacks()">Показать безопасные XSS атаки</button>
     <div id="attacks" style="margin-top: 20px;"></div>
 
     <script>
         function showSafeAttacks() {
+            const userInput = document.getElementById('userInput').value;
             const attacks = `
-                <pre>&lt;script&gt;alert('XSS')&lt;/script&gt; - Пример скрипта</pre>
-                <pre>&lt;img src=x onerror=alert('XSS')&gt; - Пример изображения</pre>
-                <pre>&lt;a href="javascript:alert('XSS')"&gt;Кликни меня&lt;/a&gt; - Пример ссылки</pre>
+                <pre>&lt;script&gt;alert('${userInput} - XSS')&lt;/script&gt; - Пример скрипта</pre>
+                <pre>&lt;img src=x onerror="alert('${userInput} - XSS')"&gt; - Пример изображения</pre>
+                <pre>&lt;a href="javascript:alert('${userInput} - XSS')"&gt;Кликни меня&lt;/a&gt; - Пример ссылки</pre>
             `;
             document.getElementById('attacks').innerHTML = attacks;
         }
     </script>
 </body>
 </html>
+
